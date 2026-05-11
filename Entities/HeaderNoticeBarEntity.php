@@ -14,6 +14,7 @@ class HeaderNoticeBarEntity extends Entity
         'background_gradient',
         'gradient_color_from',
         'gradient_color_to',
+        'text_color',
         'visible',
         'position',
         'publish_from',

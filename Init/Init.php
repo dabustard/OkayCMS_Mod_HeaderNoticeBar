@@ -30,6 +30,7 @@ class Init extends AbstractInit
             (new EntityField('background_gradient'))->setTypeVarchar(500)->setNullable(),
             (new EntityField('gradient_color_from'))->setTypeVarchar(7)->setNullable(),
             (new EntityField('gradient_color_to'))->setTypeVarchar(7)->setNullable(),
+            (new EntityField('text_color'))->setTypeVarchar(20)->setNullable(),
             (new EntityField('visible'))->setTypeTinyInt(1, true)->setDefault(1)->setIndex(),
             (new EntityField('position'))->setTypeInt(11)->setDefault(0)->setIndex(),
             (new EntityField('publish_from'))->setTypeDatetime(true),
