@@ -135,6 +135,21 @@
                     </div>
                 </div>
 
+
+                {*Колір тексту*}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="heading_label">
+                            {$btr->sviat_header_notice_bar_text_color|escape}
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="text_color" type="color"
+                                value="{if $banner->text_color}{$banner->text_color|escape}{else}#ffffff{/if}" />
+                            <small class="text-muted">{$btr->sviat_header_notice_bar_text_color_hint|escape}</small>
+                        </div>
+                    </div>
+                </div>
+
                 {*Градієнт фону*}
                 <div class="row fn_background_gradient_block" {if !$banner->background_type || $banner->background_type == 'color'}style="display: none;"{/if}>
                     <div class="col-lg-12 col-md-12">
