@@ -3,8 +3,8 @@
         {foreach $header_notice_banners as $banner name="hnb"}
             <div class="header_notice_bar header_notice_bar_carousel__slide{if $smarty.foreach.hnb.iteration == $header_notice_bar_initial_index + 1} header_notice_bar_carousel__slide_active{/if}"
                 style="{if $banner->background_type == 'gradient' && $banner->background_gradient}background: {$banner->background_gradient|escape};{elseif $banner->background_type == 'gradient' && $banner->gradient_color_from && $banner->gradient_color_to}background: linear-gradient(90deg, {$banner->gradient_color_from|escape}, {$banner->gradient_color_to|escape});{elseif $banner->background_color}background-color: {$banner->background_color|escape};{/if}">
-                <div class="header_notice_bar__content">
-                    {$banner->content nofilter}
+                <div class="header_notice_bar__content"{if $banner->text_color} style="color: {$banner->text_color|escape};"{/if}>
+                    <div class="header_notice_bar__content_inner">{$banner->content nofilter}</div>
                 </div>
             </div>
         {/foreach}
@@ -48,8 +48,22 @@
 
             var slides = carousel.querySelectorAll('.header_notice_bar_carousel__slide');
             var count = slides.length;
+
+            function applyTicker() {
+                var contents = carousel.querySelectorAll('.header_notice_bar__content');
+                contents.forEach(function(content) {
+                    var inner = content.querySelector('.header_notice_bar__content_inner');
+                    if (!inner) return;
+                    content.classList.remove('header_notice_bar__content--ticker');
+                    if (inner.scrollWidth > content.clientWidth) {
+                        content.classList.add('header_notice_bar__content--ticker');
+                    }
+                });
+            }
+
             if (count === 0) {
                 carousel.classList.add('header_notice_bar_carousel_ready');
+            window.addEventListener('resize', applyTicker);
                 return;
             }
 
@@ -108,6 +122,7 @@
             if (count === 1) {
                 showSlide(0);
                 carousel.classList.add('header_notice_bar_carousel_ready');
+            window.addEventListener('resize', applyTicker);
                 return;
             }
 
@@ -134,6 +149,7 @@
             }
 
             showSlide(currentIndex);
+            applyTicker();
             if (displayMode === 'sequence') {
                 setSequenceCookie(currentIndex, Date.now());
             }
@@ -141,6 +157,7 @@
             setInterval(function () {
                 currentIndex = getNextIndex(currentIndex);
                 showSlide(currentIndex);
+            applyTicker();
                 if (displayMode === 'sequence') {
                     localStorage.setItem(STORAGE_KEY_INDEX, String(currentIndex));
                     localStorage.setItem(STORAGE_KEY_TIME, String(Date.now()));
@@ -149,6 +166,7 @@
             }, intervalMs);
 
             carousel.classList.add('header_notice_bar_carousel_ready');
+            window.addEventListener('resize', applyTicker);
         }
 
         try {
