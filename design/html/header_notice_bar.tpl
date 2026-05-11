@@ -3,7 +3,7 @@
         {foreach $header_notice_banners as $banner name="hnb"}
             <div class="header_notice_bar header_notice_bar_carousel__slide{if $smarty.foreach.hnb.iteration == $header_notice_bar_initial_index + 1} header_notice_bar_carousel__slide_active{/if}"
                 style="{if $banner->background_type == 'gradient' && $banner->background_gradient}background: {$banner->background_gradient|escape};{elseif $banner->background_type == 'gradient' && $banner->gradient_color_from && $banner->gradient_color_to}background: linear-gradient(90deg, {$banner->gradient_color_from|escape}, {$banner->gradient_color_to|escape});{elseif $banner->background_color}background-color: {$banner->background_color|escape};{/if}">
-                <div class="header_notice_bar__content"{if $banner->text_color} style="color: {$banner->text_color|escape};"{/if}>
+                <div class="header_notice_bar__content">
                     <div class="header_notice_bar__content_inner">{$banner->content nofilter}</div>
                 </div>
             </div>

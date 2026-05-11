@@ -58,25 +58,4 @@ class Init extends AbstractInit
     }
 
 
-    private function getEntityFields()
-    {
-        return [
-            (new EntityField('id'))->setIndexPrimaryKey()->setTypeInt(11, false)->setAutoIncrement(),
-            (new EntityField('name'))->setTypeVarchar(255)->setIsLang(),
-            (new EntityField('content'))->setTypeText()->setIsLang(),
-            (new EntityField('background_type'))->setTypeVarchar(20)->setDefault('color'),
-            (new EntityField('background_color'))->setTypeVarchar(7)->setDefault('#ffffff'),
-            (new EntityField('background_gradient'))->setTypeVarchar(500)->setNullable(),
-            (new EntityField('gradient_color_from'))->setTypeVarchar(7)->setNullable(),
-            (new EntityField('gradient_color_to'))->setTypeVarchar(7)->setNullable(),
-            (new EntityField('text_color'))->setTypeVarchar(20)->setNullable(),
-            (new EntityField('visible'))->setTypeTinyInt(1, true)->setDefault(1)->setIndex(),
-            (new EntityField('position'))->setTypeInt(11)->setDefault(0)->setIndex(),
-            (new EntityField('publish_from'))->setTypeDatetime(true),
-            (new EntityField('publish_to'))->setTypeDatetime(true),
-            (new EntityField('created_at'))->setTypeDatetime(false),
-            (new EntityField('updated_at'))->setTypeDatetime(false),
-        ];
-    }
-
 }
